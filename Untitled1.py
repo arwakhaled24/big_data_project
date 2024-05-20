@@ -1,32 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[3]:
-
-
 import pandas as pd
-
-# URL of the dataset
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data"
-
-# Column names for the dataset
-column_names = [
-    'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg',
-    'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'target'
-]
-
-# Load the dataset into a DataFrame
-data = pd.read_csv(url, names=column_names)
-
-# Save the dataset to a CSV file
-data.to_csv('heart_disease.csv', index=False)
-
-print("Dataset downloaded and saved as heart_disease.csv")
-
-
-# In[4]:
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -43,6 +15,38 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 
+# URL of the dataset
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data"
+
+# Column names for the dataset
+column_names = [
+    'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 
+    'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'target'
+]
+
+# Load the dataset into a DataFrame
+data = pd.read_csv(url, names=column_names)
+
+# Save the dataset to a CSV file
+data.to_csv('heart_disease.csv', index=False)
+
+print("Dataset downloaded and saved as heart_disease.csv")
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# For preprocessing
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_score, recall_score, accuracy_score
+
+# Models
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neural_network import MLPClassifier
 
 # In[5]:
 
@@ -215,23 +219,16 @@ metrics = {
 metrics_df = pd.DataFrame(metrics)
 
 plt.figure(figsize=(10, 5))
-sns.barplot(x='Model', y='Precision', data=metrics_df)
+sns.barplot(x='Model', y='Precision', data=metrics_df, palette="Blues_d")
 plt.title('Model Precision')
 plt.show()
 
 plt.figure(figsize=(10, 5))
-sns.barplot(x='Model', y='Recall', data=metrics_df)
+sns.barplot(x='Model', y='Recall', data=metrics_df, palette="Greens_d")
 plt.title('Model Recall')
 plt.show()
 
 plt.figure(figsize=(10, 5))
-sns.barplot(x='Model', y='Accuracy', data=metrics_df)
+sns.barplot(x='Model', y='Accuracy', data=metrics_df, palette="Reds_d")
 plt.title('Model Accuracy')
 plt.show()
-
-
-# In[ ]:
-
-
-
-
